@@ -1,0 +1,10 @@
+# ~/.config/mako/config
+
+# ===== 基础样式 =====
+width=300
+height=80
+margin=10
+padding=10
+border-size=1
+border-radius=8
+font="Maple Mono NF CN 10"

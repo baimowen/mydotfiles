@@ -1,0 +1,11 @@
+local SCRIPT_DIR="scripts"
+
+if [[ -d "$SCRIPT_DIR" ]]; then
+    for func_file in "$SCRIPT_DIR"/*(N); do
+        if [[ -f "$func_file" ]]; then
+            source "$func_file"
+        fi
+    done
+else
+    echo "Warning: Shell functions directory not found: $SCRIPT_DIR" >&2
+fi

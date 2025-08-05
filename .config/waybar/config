@@ -1,0 +1,138 @@
+{
+    "layer": "top",  // 在所有窗口上方
+    "position": "top",  // waybar在屏幕上的位置(top|bottom|left|right)
+    
+    "height": 30,  // 高度
+    "margin": "0 0 0 0",  // 边距
+    
+    "modules-left": ["hyprland/workspaces"],  // 位于waybar左侧位置的模块
+    "modules-center": ["custom/record","custom/island"],  // 位于waybar中间位置的模块
+    "modules-right": ["custom/input-lang","pulseaudio","custom/network","clock"],  // 位于waybar右侧位置的模块
+
+    // custom modules //
+
+    // left ////////////////////////////
+    
+    // 工作区
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-active": " {icon} ",
+        "on-click": "activate"
+        // "format-icons":{
+        //     "10":"10"
+        // }
+    },
+
+    // center ////////////////////////////
+
+    "custom/record": {
+        "exec": "/home/arch/.config/waybar/scripts/record/record.sh",
+        "interval": 1,  // 1秒刷新一次状态
+        "return-type": "json",
+        "format": "{}",
+        "on-click": "/home/arch/.config/waybar/scripts/record/record.sh screenshot",
+        "on-click-right": "/home/arch/.config/waybar/scripts/record/record.sh record"
+    },
+
+    // 灵动岛
+    "custom/island": {
+        "exec": "/home/arch/.config/waybar/scripts/island/start_island.sh",
+        "return-type": "json",
+        "on-click": "mpc toggle",
+        "escape":true
+    },
+
+    // mpd
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "custom/waybar-mpris": {
+        "return-type": "json",
+         "exec": "echo '   '",
+         "on-click": "waybar-mpris --send toggle",
+         // This option will switch between players on right click.
+             "on-click-right": "waybar-mpris --send player-next",
+         // The options below will switch the selected player on scroll
+             // "on-scroll-up": "waybar-mpris --send player-next",
+             // "on-scroll-down": "waybar-mpris --send player-prev",
+         // The options below will go to next/previous track on scroll
+             // "on-scroll-up": "waybar-mpris --send next",
+             // "on-scroll-down": "waybar-mpris --send prev",
+         "escape": true,
+     },
+    // "custom/media": {
+    //     "format": "{icon} {}",
+    //     "return-type": "json",
+    //     "max-length": 40,
+    //     "format-icons": {
+    //         "spotify": "",
+    //         "default": "🎜"
+    //     },
+    //     "escape": true,
+    //     "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    //     // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    // }
+
+    // right ////////////////////////////
+
+    // 输入法语言
+    // "custom/input-lang":{},
+    // 
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    // 网络设置
+    "custom/network": {
+    "exec": "/home/arch/.config/waybar/scripts/network/network.sh",
+    "interval": 10,  // 每 10 秒更新一次
+    "format": "{}",
+    "on-click": "nm-connection-editor",  // 点击打开 nmgui
+    "on-click-right": "kitty -e nmtui"  // 右键打开 kitty:nmtui
+    },
+
+    // 时钟
+    "clock": {
+        // "timezone": "Asia/Shanghai",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "interval": 60,
+        "format": "{:%H:%M}",
+        "max-length": 25
+    },
+}
