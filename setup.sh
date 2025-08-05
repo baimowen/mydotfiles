@@ -97,18 +97,20 @@ function backup_config() {
 }
 
 function setup_config() {
-    read -p "${GREEN}正在克隆仓库...${PLAIN}"
-    if ! git clone https://github.com/baimowen/mydotfiles.git ~/mydotfiles; then
-        echo -e "${ERROR}仓库克隆失败.${PLAIN}"
-        exit 1
-    fi
+    echo -e "${GREEN}正在克隆仓库...${PLAIN}"
+    # if ! git clone https://github.com/baimowen/mydotfiles.git ~/mydotfiles; then
+    #     echo -e "${ERROR}仓库克隆失败.${PLAIN}"
+    #     exit 1
+    # fi
+    git clone https://github.com/baimowen/mydotfiles.git ~/mydotfiles || { echo -e "${ERROR}仓库克隆失败.${PLAIN}"; exit 1; }
     if [ -d ${HOME}/.config ]; then
         read -p "检测到已有配置文件目录，是否覆盖？(y/n)" overwrite_choice
         case $overwrite_choice in
             [yY])
-                echo -e "${BLUE}正在覆盖配置文件${PLAIN}"`
-                rm -rf ~/.config/* \
-                    && cp -a ~/mydotfiles/* ~/.config/ \
+                echo -e "${BLUE}正在覆盖配置文件${PLAIN}"
+                rm -rf ${HOME}/.config/* \
+                    && cp -a ~/mydotfiles/.config/* ${HOME}/.config/ \
+                    && cp -a ~/mydotfiles/.tmux.conf ~/mydotfiles/.zshrc ~/mydotfiles/.zprofile ~/mydotfiles/.vimrc ${HOME}/ \
                     && echo -e "${SUCCESS}配置文件安装完成！${PLAIN}"
                 ;;
             [nN])
@@ -120,6 +122,11 @@ function setup_config() {
                 exit 1
                 ;;
         esac
+    else
+        mkdir -p "${HOME}/.config"
+        cp -a ~/mydotfiles/.config/* "${HOME}/.config"/
+        cp -a ~/mydotfiles/.tmux.conf ~/mydotfiles/.zshrc ~/mydotfiles/.zprofile ~/mydotfiles/.vimrc ${HOME}/
+        echo -e "${SUCCESS}配置文件安装完成！${PLAIN}"
     fi
 }
 
@@ -129,7 +136,7 @@ function main() {
     save_log
 
     # 检测系统信息
-    collect_system_info
+    # collect_system_info
 
     # 判断root
     is_root
