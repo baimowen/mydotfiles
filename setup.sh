@@ -103,6 +103,8 @@ function setup_config() {
     #     exit 1
     # fi
     git clone https://github.com/baimowen/mydotfiles.git ~/mydotfiles || { echo -e "${ERROR}仓库克隆失败.${PLAIN}"; exit 1; }
+    chmod +x ~/mydotfiles/.config/shell/*.sh
+    chmod +x ~/mydotfiles/.config/shell/scripts/*.sh
     if [ -d ${HOME}/.config ]; then
         read -p "检测到已有配置文件目录，是否覆盖？(y/n)" overwrite_choice
         case $overwrite_choice in
