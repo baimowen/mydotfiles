@@ -104,7 +104,7 @@
       # unzip rsync
     ];
     # openssh.authorizedKeys.keys = [
-    #   "ssh ... hostname"
+    #   "ssh-ed25519 <key> hostname"
     # ]
   };
 

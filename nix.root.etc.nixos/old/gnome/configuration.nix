@@ -116,6 +116,7 @@
   users.users.nix = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.zsh; # setting user's default shell
     packages = with pkgs; [
       neofetch
       neovim bat
@@ -130,9 +131,12 @@
   };
 
   # enable zsh support
-  programs.zsh.enable = true;
-  # setting user's default shell
-  users.users.nix.shell = pkgs.zsh;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+  };
 
   programs.firefox.enable = true;
 
