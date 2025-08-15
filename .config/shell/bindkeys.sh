@@ -7,3 +7,6 @@
 # bindkey -M vicmd '\e\e' sudo
 bindkey -r "^I"
 bindkey "^I" complete-word
+
+bindkey "^[[1;5C" forward-word   # Ctrl + →
+bindkey "^[[1;5D" backward-word  # Ctrl + ←

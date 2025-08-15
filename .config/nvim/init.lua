@@ -6,10 +6,6 @@ vim.wo.cursorline = true
 -- 显示行号
 vim.opt.number = true
 
--- nvim-tree 配置
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 -- 透明背景
 vim.cmd([[
   highlight Normal guibg=NONE ctermbg=NONE
@@ -17,3 +13,11 @@ vim.cmd([[
   highlight LineNr guibg=NONE ctermbg=NONE
   highlight SignColumn guibg=NONE ctermbg=NONE
 ]])
+vim.g.neovide_opacity = 0.0
+
+-- 快捷键
+
+
+-- nvim-tree 配置
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
